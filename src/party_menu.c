@@ -5344,6 +5344,26 @@ void ItemUseCB_EvolutionStone(u8 taskId, TaskFunc task)
 {
     PlaySE(SE_SELECT);
     gCB2_AfterEvolution = gPartyMenu.exitCallback;
+    if (gSpecialVar_ItemId == ITEM_LINK_CABLE)
+    {
+        struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
+        u16 targetSpecies = GetEvolutionTargetSpecies(mon, EVO_MODE_ITEM_USE, ITEM_LINK_CABLE);
+
+        if (targetSpecies == SPECIES_NONE)
+        {
+            gPartyMenuUseExitCallback = FALSE;
+            DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
+            ScheduleBgCopyTilemapToVram(2);
+            gTasks[taskId].func = task;
+        }
+        else
+        {
+            FreePartyPointers();
+            BeginEvolutionScene(mon, targetSpecies, FALSE, gPartyMenu.slotId);
+            DestroyTask(taskId);
+        }
+        return;
+    }
     if (ExecuteTableBasedItemEffect_(gPartyMenu.slotId, gSpecialVar_ItemId, 0))
     {
         gPartyMenuUseExitCallback = FALSE;

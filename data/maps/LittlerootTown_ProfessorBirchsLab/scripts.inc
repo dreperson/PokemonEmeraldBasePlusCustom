@@ -141,6 +141,8 @@ LittlerootTown_ProfessorBirchsLab_EventScript_GivePortaPc::
 	giveitem ITEM_ENDLESS_CANDY
 	giveitem ITEM_ENDLESS_REPEL
 	giveitem ITEM_STATUS_CASE
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_LinkCable, MSGBOX_DEFAULT
+	giveitem ITEM_LINK_CABLE
 	releaseall
 	end
 
@@ -1112,3 +1114,10 @@ LittlerootTown_ProfessorBirchsLab_Text_PatchGuyItemsHad:
 LittlerootTown_ProfessorBirchsLab_Text_PatchGuyItemsGiven:
 	.string "Now you have all the new key items.\n$"
 
+
+LittlerootTown_ProfessorBirchsLab_Text_LinkCable:
+	.string "This LINK CABLE lets POKEMON evolve\n"
+	.string "without needing to trade!\p"
+	.string "You can use it again and again.\p"
+	.string "If an evolution needs a held item,\n"
+	.string "give it to the POKEMON first.$"

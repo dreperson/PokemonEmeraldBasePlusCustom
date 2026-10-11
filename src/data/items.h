@@ -4604,6 +4604,18 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_StatusCase,
     },
 
+    [ITEM_LINK_CABLE] =
+    {
+        .name = _("LINK CABLE"),
+        .itemId = ITEM_LINK_CABLE,
+        .price = 0,
+        .description = sLinkCableDesc,
+        .importance = 1,
+        .registrability = TRUE,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
+    },
 };
 
 

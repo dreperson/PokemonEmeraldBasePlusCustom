@@ -65,4 +65,10 @@ void BasePlusItems(void)
 		AddBagItem(ITEM_STATUS_CASE, 1);
 	}
 
+	if (!CheckBagHasItem(ITEM_LINK_CABLE, 1))
+	{
+		VarSet(VAR_RESULT, 0);
+		AddBagItem(ITEM_LINK_CABLE, 1);
+	}
+
 }
