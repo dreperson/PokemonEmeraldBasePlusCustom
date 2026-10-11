@@ -128,3 +128,20 @@ Route123_BerryMastersHouse_EventScript_GaveBerry::
 	release
 	end
 
+@ Reserve unused persistent flag 0x21 for this one-time gift.
+Route123_BerryMastersHouse_EventScript_PamtreBerryGift::
+	lock
+	faceplayer
+	msgbox Route123_BerryMastersHouse_Text_PamtreBerryGift, MSGBOX_DEFAULT
+	goto_if_set FLAG_UNUSED_0x021, Route123_BerryMastersHouse_EventScript_PamtreBerryGiftDone
+	giveitem ITEM_PAMTRE_BERRY, 999
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	setflag FLAG_UNUSED_0x021
+
+Route123_BerryMastersHouse_EventScript_PamtreBerryGiftDone::
+	release
+	end
+
+Route123_BerryMastersHouse_Text_PamtreBerryGift:
+	.string "These are for evolving Feebas.\n"
+	.string "Look it up.....$"
