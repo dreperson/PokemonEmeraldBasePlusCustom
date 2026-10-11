@@ -5607,6 +5607,28 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem)
     case EVO_MODE_ITEM_CHECK:
         for (i = 0; i < EVOS_PER_MON; i++)
         {
+            if (evolutionItem == ITEM_LINK_CABLE)
+            {
+                if (GetMonData(mon, MON_DATA_IS_EGG, 0))
+                    break;
+                if (gEvolutionTable[species][i].method == EVO_TRADE)
+                {
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                    break;
+                }
+                if (gEvolutionTable[species][i].method == EVO_TRADE_ITEM
+                 && gEvolutionTable[species][i].param == heldItem)
+                {
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                    if (mode == EVO_MODE_ITEM_USE)
+                    {
+                        heldItem = ITEM_NONE;
+                        SetMonData(mon, MON_DATA_HELD_ITEM, &heldItem);
+                    }
+                    break;
+                }
+                continue;
+            }
             if (gEvolutionTable[species][i].method == EVO_ITEM
              && gEvolutionTable[species][i].param == evolutionItem)
             {
