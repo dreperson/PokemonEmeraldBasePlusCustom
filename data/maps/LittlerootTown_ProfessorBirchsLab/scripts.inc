@@ -1126,6 +1126,8 @@ LittlerootTown_ProfessorBirchsLab_EventScript_TmRestock::
 	lock
 	faceplayer
 	goto_if_unset FLAG_BADGE06_GET, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockLocked
+	@ Reserve unused persistent flag 0x22 for the one-time restock.
+	goto_if_set FLAG_UNUSED_0x022, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockUsed
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_TmRestock, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockDone
 	checkitem ITEM_TM01
@@ -1373,6 +1375,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext54::
 	additem ITEM_HM06, 1
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext55::
+	setflag FLAG_UNUSED_0x022
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_TmRestockComplete, MSGBOX_DEFAULT
 LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockDone::
 	release
@@ -1382,12 +1385,12 @@ LittlerootTown_ProfessorBirchsLab_Text_TmRestock:
 	.string "Missing some TMs or HMs?\p"
 	.string "I stock the TMs and HMs you can get\n"
 	.string "before beating TATE and LIZA.\p"
-	.string "Want me to top up your bag?$"
+	.string "I only do this once. Ready?$"
 
 LittlerootTown_ProfessorBirchsLab_Text_TmRestockComplete:
 	.string "All set! Your pre-gym TMs and\n"
 	.string "HM01 through HM06.\p"
-	.string "Come back any time you need more!$"
+	.string "That was your one-time restock!$"
 
 LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockLocked::
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_TmRestockLocked, MSGBOX_DEFAULT
@@ -1398,3 +1401,12 @@ LittlerootTown_ProfessorBirchsLab_Text_TmRestockLocked:
 	.string "Beat WINONA and earn the FEATHER\n"
 	.string "BADGE first. Then I can restock\l"
 	.string "your TMs and HMs!$"
+
+LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockUsed::
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_TmRestockUsed, MSGBOX_DEFAULT
+	release
+	end
+
+LittlerootTown_ProfessorBirchsLab_Text_TmRestockUsed:
+	.string "I've already restocked your bag.\n"
+	.string "It's a one-time service!$"
