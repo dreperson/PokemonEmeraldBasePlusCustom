@@ -1132,21 +1132,6 @@ LittlerootTown_ProfessorBirchsLab_EventScript_TmRestock::
 	additem ITEM_TM01, 1
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext0::
-	checkitem ITEM_TM02
-	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext1
-	additem ITEM_TM02, 1
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext1::
-	checkitem ITEM_TM03
-	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext2
-	additem ITEM_TM03, 1
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext2::
-	checkitem ITEM_TM04
-	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext3
-	additem ITEM_TM04, 1
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext3::
 	checkitem ITEM_TM05
 	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext4
 	additem ITEM_TM05, 1
@@ -1237,11 +1222,6 @@ LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext20::
 	additem ITEM_TM22, 1
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext21::
-	checkitem ITEM_TM23
-	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext22
-	additem ITEM_TM23, 1
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext22::
 	checkitem ITEM_TM24
 	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext23
 	additem ITEM_TM24, 1
@@ -1252,11 +1232,6 @@ LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext23::
 	additem ITEM_TM25, 1
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext24::
-	checkitem ITEM_TM26
-	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext25
-	additem ITEM_TM26, 1
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext25::
 	checkitem ITEM_TM27
 	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext26
 	additem ITEM_TM27, 1
@@ -1277,11 +1252,6 @@ LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext28::
 	additem ITEM_TM30, 1
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext29::
-	checkitem ITEM_TM31
-	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext30
-	additem ITEM_TM31, 1
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext30::
 	checkitem ITEM_TM32
 	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext31
 	additem ITEM_TM32, 1
@@ -1367,11 +1337,6 @@ LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext46::
 	additem ITEM_TM48, 1
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext47::
-	checkitem ITEM_TM49
-	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext48
-	additem ITEM_TM49, 1
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext48::
 	checkitem ITEM_TM50
 	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext49
 	additem ITEM_TM50, 1
@@ -1414,11 +1379,11 @@ LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockDone::
 
 LittlerootTown_ProfessorBirchsLab_Text_TmRestock:
 	.string "Missing some TMs or HMs?\p"
-	.string "I can restock every TM, plus the HMs\n"
-	.string "available before TATE and LIZA.\p"
+	.string "I stock the TMs and HMs you can get\n"
+	.string "before beating TATE and LIZA.\p"
 	.string "Want me to top up your bag?$"
 
 LittlerootTown_ProfessorBirchsLab_Text_TmRestockComplete:
-	.string "All set! One of every TM and\n"
+	.string "All set! Your pre-gym TMs and\n"
 	.string "HM01 through HM06.\p"
 	.string "Come back any time you need more!$"
