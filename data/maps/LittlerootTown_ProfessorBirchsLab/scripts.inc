@@ -1121,3 +1121,304 @@ LittlerootTown_ProfessorBirchsLab_Text_LinkCable:
 	.string "You can use it again and again.\p"
 	.string "If an evolution needs a held item,\n"
 	.string "give it to the POKEMON first.$"
+
+LittlerootTown_ProfessorBirchsLab_EventScript_TmRestock::
+	lock
+	faceplayer
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_TmRestock, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockDone
+	checkitem ITEM_TM01
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext0
+	additem ITEM_TM01, 1
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext0::
+	checkitem ITEM_TM02
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext1
+	additem ITEM_TM02, 1
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext1::
+	checkitem ITEM_TM03
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext2
+	additem ITEM_TM03, 1
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext2::
+	checkitem ITEM_TM04
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext3
+	additem ITEM_TM04, 1
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext3::
+	checkitem ITEM_TM05
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext4
+	additem ITEM_TM05, 1
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext4::
+	checkitem ITEM_TM06
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext5
+	additem ITEM_TM06, 1
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext5::
+	checkitem ITEM_TM07
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext6
+	additem ITEM_TM07, 1
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext6::
+	checkitem ITEM_TM08
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext7
+	additem ITEM_TM08, 1
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext7::
+	checkitem ITEM_TM09
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext8
+	additem ITEM_TM09, 1
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext8::
+	checkitem ITEM_TM10
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext9
+	additem ITEM_TM10, 1
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext9::
+	checkitem ITEM_TM11
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext10
+	additem ITEM_TM11, 1
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext10::
+	checkitem ITEM_TM12
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext11
+	additem ITEM_TM12, 1
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext11::
+	checkitem ITEM_TM13
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext12
+	additem ITEM_TM13, 1
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext12::
+	checkitem ITEM_TM14
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext13
+	additem ITEM_TM14, 1
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext13::
+	checkitem ITEM_TM15
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext14
+	additem ITEM_TM15, 1
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext14::
+	checkitem ITEM_TM16
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext15
+	additem ITEM_TM16, 1
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext15::
+	checkitem ITEM_TM17
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext16
+	additem ITEM_TM17, 1
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext16::
+	checkitem ITEM_TM18
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext17
+	additem ITEM_TM18, 1
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext17::
+	checkitem ITEM_TM19
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext18
+	additem ITEM_TM19, 1
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext18::
+	checkitem ITEM_TM20
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext19
+	additem ITEM_TM20, 1
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext19::
+	checkitem ITEM_TM21
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext20
+	additem ITEM_TM21, 1
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext20::
+	checkitem ITEM_TM22
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext21
+	additem ITEM_TM22, 1
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext21::
+	checkitem ITEM_TM23
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext22
+	additem ITEM_TM23, 1
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext22::
+	checkitem ITEM_TM24
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext23
+	additem ITEM_TM24, 1
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext23::
+	checkitem ITEM_TM25
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext24
+	additem ITEM_TM25, 1
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext24::
+	checkitem ITEM_TM26
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext25
+	additem ITEM_TM26, 1
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext25::
+	checkitem ITEM_TM27
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext26
+	additem ITEM_TM27, 1
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext26::
+	checkitem ITEM_TM28
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext27
+	additem ITEM_TM28, 1
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext27::
+	checkitem ITEM_TM29
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext28
+	additem ITEM_TM29, 1
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext28::
+	checkitem ITEM_TM30
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext29
+	additem ITEM_TM30, 1
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext29::
+	checkitem ITEM_TM31
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext30
+	additem ITEM_TM31, 1
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext30::
+	checkitem ITEM_TM32
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext31
+	additem ITEM_TM32, 1
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext31::
+	checkitem ITEM_TM33
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext32
+	additem ITEM_TM33, 1
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext32::
+	checkitem ITEM_TM34
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext33
+	additem ITEM_TM34, 1
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext33::
+	checkitem ITEM_TM35
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext34
+	additem ITEM_TM35, 1
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext34::
+	checkitem ITEM_TM36
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext35
+	additem ITEM_TM36, 1
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext35::
+	checkitem ITEM_TM37
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext36
+	additem ITEM_TM37, 1
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext36::
+	checkitem ITEM_TM38
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext37
+	additem ITEM_TM38, 1
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext37::
+	checkitem ITEM_TM39
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext38
+	additem ITEM_TM39, 1
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext38::
+	checkitem ITEM_TM40
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext39
+	additem ITEM_TM40, 1
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext39::
+	checkitem ITEM_TM41
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext40
+	additem ITEM_TM41, 1
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext40::
+	checkitem ITEM_TM42
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext41
+	additem ITEM_TM42, 1
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext41::
+	checkitem ITEM_TM43
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext42
+	additem ITEM_TM43, 1
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext42::
+	checkitem ITEM_TM44
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext43
+	additem ITEM_TM44, 1
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext43::
+	checkitem ITEM_TM45
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext44
+	additem ITEM_TM45, 1
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext44::
+	checkitem ITEM_TM46
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext45
+	additem ITEM_TM46, 1
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext45::
+	checkitem ITEM_TM47
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext46
+	additem ITEM_TM47, 1
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext46::
+	checkitem ITEM_TM48
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext47
+	additem ITEM_TM48, 1
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext47::
+	checkitem ITEM_TM49
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext48
+	additem ITEM_TM49, 1
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext48::
+	checkitem ITEM_TM50
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext49
+	additem ITEM_TM50, 1
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext49::
+	checkitem ITEM_HM01
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext50
+	additem ITEM_HM01, 1
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext50::
+	checkitem ITEM_HM02
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext51
+	additem ITEM_HM02, 1
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext51::
+	checkitem ITEM_HM03
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext52
+	additem ITEM_HM03, 1
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext52::
+	checkitem ITEM_HM04
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext53
+	additem ITEM_HM04, 1
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext53::
+	checkitem ITEM_HM05
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext54
+	additem ITEM_HM05, 1
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext54::
+	checkitem ITEM_HM06
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext55
+	additem ITEM_HM06, 1
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockNext55::
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_TmRestockComplete, MSGBOX_DEFAULT
+LittlerootTown_ProfessorBirchsLab_EventScript_TmRestockDone::
+	release
+	end
+
+LittlerootTown_ProfessorBirchsLab_Text_TmRestock:
+	.string "Missing some TMs or HMs?\p"
+	.string "I can restock every TM, plus the HMs\n"
+	.string "available before TATE and LIZA.\p"
+	.string "Want me to top up your bag?$"
+
+LittlerootTown_ProfessorBirchsLab_Text_TmRestockComplete:
+	.string "All set! One of every TM and\n"
+	.string "HM01 through HM06.\p"
+	.string "Come back any time you need more!$"
