@@ -5042,7 +5042,7 @@ void ItemUseCB_RareCandy(u8 taskId, TaskFunc task)
     u16 *itemPtr = &gSpecialVar_ItemId;
     u8 level = GetMonData(mon, MON_DATA_LEVEL);
     bool8 cannotUseEffect;
-    bool8 retain;
+    bool8 retain = FALSE;
     bool8 carryOn;
 
     if (*itemPtr == ITEM_ENDLESS_CANDY)
@@ -5059,6 +5059,9 @@ void ItemUseCB_RareCandy(u8 taskId, TaskFunc task)
         {
             carryOn = FALSE;
             DisplayPartyMenuMessage(gText_LevelCapMet, TRUE);
+            gPartyMenuUseExitCallback = FALSE;
+            ScheduleBgCopyTilemapToVram(2);
+            gTasks[taskId].func = task;
         }
     }
     if (carryOn)
@@ -5088,7 +5091,8 @@ void ItemUseCB_RareCandy(u8 taskId, TaskFunc task)
             gPartyMenuUseExitCallback = TRUE;
             PlayFanfareByFanfareNum(FANFARE_LEVEL_UP);
             UpdateMonDisplayInfoAfterRareCandy(gPartyMenu.slotId, mon);
-            RemoveBagItem(gSpecialVar_ItemId, 1);
+            if (!retain)
+                RemoveBagItem(gSpecialVar_ItemId, 1);
             GetMonNickname(mon, gStringVar1);
             ConvertIntToDecimalStringN(gStringVar2, GetMonData(mon, MON_DATA_LEVEL), STR_CONV_MODE_LEFT_ALIGN, 3);
             StringExpandPlaceholders(gStringVar4, gText_PkmnElevatedToLvVar2);
@@ -5097,11 +5101,9 @@ void ItemUseCB_RareCandy(u8 taskId, TaskFunc task)
             gTasks[taskId].func = Task_DisplayLevelUpStatsPg1;
         }
 
-        if (retain) 
-        {
-            gSpecialVar_ItemId = ITEM_ENDLESS_CANDY;
-        }
     }
+    if (retain)
+        gSpecialVar_ItemId = ITEM_ENDLESS_CANDY;
 }
 
 static void UpdateMonDisplayInfoAfterRareCandy(u8 slot, struct Pokemon *mon)

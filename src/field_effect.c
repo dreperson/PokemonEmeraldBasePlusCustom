@@ -2584,8 +2584,18 @@ bool8 FldEff_FieldMoveShowMon(void)
 bool8 FldEff_FieldMoveShowMonInit(void)
 {
     struct Pokemon *pokemon;
+    u8 partyIndex = (u8)gFieldEffectArguments[0];
     bool32 noDucking = gFieldEffectArguments[0] & SHOW_MON_CRY_NO_DUCKING;
-    pokemon = &gPlayerParty[(u8)gFieldEffectArguments[0]];
+
+    // A stale field-effect argument must never become an out-of-bounds Pokemon pointer.
+    if (gPlayerPartyCount == 0)
+    {
+        FieldEffectActiveListRemove(FLDEFF_FIELD_MOVE_SHOW_MON_INIT);
+        return FALSE;
+    }
+    if (partyIndex >= PARTY_SIZE || partyIndex >= gPlayerPartyCount)
+        partyIndex = 0;
+    pokemon = &gPlayerParty[partyIndex];
     gFieldEffectArguments[0] = GetMonData(pokemon, MON_DATA_SPECIES);
     gFieldEffectArguments[1] = GetMonData(pokemon, MON_DATA_OT_ID);
     gFieldEffectArguments[2] = GetMonData(pokemon, MON_DATA_PERSONALITY);
