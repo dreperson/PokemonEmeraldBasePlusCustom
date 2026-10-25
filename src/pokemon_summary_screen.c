@@ -2293,12 +2293,8 @@ static void Task_HandleReplaceMoveInput(u8 taskId)
 
 static bool8 CanReplaceMove(void)
 {
-    if (sMonSummaryScreen->firstMoveIndex == MAX_MON_MOVES
-        || sMonSummaryScreen->newMove == MOVE_NONE
-        || IsMoveHm(sMonSummaryScreen->summary.moves[sMonSummaryScreen->firstMoveIndex]) != TRUE)
-        return TRUE;
-    else
-        return FALSE;
+    // Badge-based field moves do not require keeping an HM in a Pokemon's moveset.
+    return TRUE;
 }
 
 static void ShowCantForgetHMsWindow(u8 taskId)
