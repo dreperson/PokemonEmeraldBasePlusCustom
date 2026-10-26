@@ -543,3 +543,5 @@ gSpecials::
 	def_special BERsNo
 	def_special BERsYes
 	def_special BasePlusItems
+	def_special FindPartyFeebas
+	def_special MaxPartyFeebasBeauty
