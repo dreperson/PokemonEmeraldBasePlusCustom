@@ -3,6 +3,7 @@
 #include "egg_hatch.h"
 #include "pokedex.h"
 #include "constants/items.h"
+#include "constants/pokemon.h"
 #include "script.h"
 #include "decompress.h"
 #include "task.h"
@@ -347,7 +348,7 @@ static void CreateHatchedMon(struct Pokemon *egg, struct Pokemon *temp)
     SetMonData(temp, MON_DATA_MET_GAME, &gameMet);
     SetMonData(temp, MON_DATA_MARKINGS, &markings);
 
-    friendship = 120;
+    friendship = gSpeciesInfo[species].friendship == MAX_FRIENDSHIP ? MAX_FRIENDSHIP : 120;
     SetMonData(temp, MON_DATA_FRIENDSHIP, &friendship);
     SetMonData(temp, MON_DATA_POKERUS, &pokerus);
     SetMonData(temp, MON_DATA_MODERN_FATEFUL_ENCOUNTER, &isModernFatefulEncounter);

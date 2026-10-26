@@ -4,6 +4,8 @@
 #include "constants/flags.h"  // FLAG_DEFEATED_...
 #include "item.h"              // CheckBagHasItem, AddBagItem
 #include "constants/items.h"   // ITEM_*
+#include "pokemon.h"
+#include "constants/species.h"
 
 void EVsNo(void)
 {
@@ -65,4 +67,36 @@ void BasePlusItems(void)
 		AddBagItem(ITEM_STATUS_CASE, 1);
 	}
 
+	if (!CheckBagHasItem(ITEM_LINK_CABLE, 1))
+	{
+		VarSet(VAR_RESULT, 0);
+		AddBagItem(ITEM_LINK_CABLE, 1);
+	}
+
+}
+
+void FindPartyFeebas(void)
+{
+    u8 i;
+
+    gSpecialVar_Result = FALSE;
+    for (i = 0; i < gPlayerPartyCount && i < PARTY_SIZE; i++)
+    {
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG) == SPECIES_FEEBAS)
+        {
+            gSpecialVar_0x8004 = i;
+            gSpecialVar_Result = TRUE;
+            return;
+        }
+    }
+}
+
+void MaxPartyFeebasBeauty(void)
+{
+    u8 beauty = 255;
+    u16 i = gSpecialVar_0x8004;
+
+    if (i < gPlayerPartyCount && i < PARTY_SIZE
+     && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG) == SPECIES_FEEBAS)
+        SetMonData(&gPlayerParty[i], MON_DATA_BEAUTY, &beauty);
 }
