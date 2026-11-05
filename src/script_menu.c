@@ -763,3 +763,97 @@ int ScriptMenu_AdjustLeftCoordFromWidth(int left, int width)
 
     return adjustedLeft;
 }
+
+// The coin clerk selects one of four decimal digits at a time.
+static const u16 sCoinDigitPlaces[] = {1000, 100, 10, 1};
+static const u8 sCoinDigitCursor[] = _("{UP_ARROW}");
+
+static void DrawCoinQuantity(u8 windowId, u16 count, u8 cursor)
+{
+    u8 i;
+    u8 digit[2];
+
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
+    ConvertIntToDecimalStringN(gStringVar1, count, STR_CONV_MODE_LEADING_ZEROS, 4);
+    digit[1] = EOS;
+    for (i = 0; i < 4; i++)
+    {
+        digit[0] = gStringVar1[i];
+        AddTextPrinterParameterized(windowId, FONT_NORMAL, digit, 8 + i * 16, 1, TEXT_SKIP_DRAW, NULL);
+    }
+    AddTextPrinterParameterized(windowId, FONT_NORMAL, sCoinDigitCursor, 8 + cursor * 16, 17, TEXT_SKIP_DRAW, NULL);
+    CopyWindowToVram(windowId, COPYWIN_FULL);
+}
+
+static void Task_ChooseCoinQuantity(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    u16 count = data[0];
+    u8 cursor = data[1];
+    u8 windowId = data[2];
+    u16 place;
+    u8 digit;
+
+    // Do not reuse the button press that closed the previous message.
+    if (data[3] != 0)
+    {
+        data[3]--;
+        return;
+    }
+
+    if (JOY_NEW(A_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        gSpecialVar_0x8004 = count;
+        gSpecialVar_Result = 0;
+    }
+    else if (JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        gSpecialVar_Result = MULTI_B_PRESSED;
+    }
+    else
+    {
+        if (JOY_NEW(DPAD_LEFT))
+            cursor = (cursor + 3) % 4;
+        else if (JOY_NEW(DPAD_RIGHT))
+            cursor = (cursor + 1) % 4;
+        else if (JOY_REPEAT(DPAD_UP))
+        {
+            place = sCoinDigitPlaces[cursor];
+            digit = (count / place) % 10;
+            count = digit == 9 ? count - 9 * place : count + place;
+        }
+        else if (JOY_REPEAT(DPAD_DOWN))
+        {
+            place = sCoinDigitPlaces[cursor];
+            digit = (count / place) % 10;
+            count = digit == 0 ? count + 9 * place : count - place;
+        }
+        if (count != data[0] || cursor != data[1])
+        {
+            data[0] = count;
+            data[1] = cursor;
+            DrawCoinQuantity(windowId, count, cursor);
+        }
+        return;
+    }
+
+    ClearToTransparentAndRemoveWindow(windowId);
+    DestroyTask(taskId);
+    ScriptContext_Enable();
+}
+
+void ShowCoinQuantityMenu(void)
+{
+    u8 taskId = CreateTask(Task_ChooseCoinQuantity, 80);
+    u8 windowId = CreateWindowFromRect(18, 1, 10, 4);
+
+    gTasks[taskId].data[0] = 0;
+    gTasks[taskId].data[1] = 3; // Start on the ones digit.
+    gTasks[taskId].data[2] = windowId;
+    gTasks[taskId].data[3] = 5;
+    SetStandardWindowBorderStyle(windowId, FALSE);
+    PutWindowTilemap(windowId);
+    DrawCoinQuantity(windowId, 0, 3);
+}

@@ -16,26 +16,11 @@ MauvilleCity_GameCorner_EventScript_CoinsClerk::
 	checkitem ITEM_COIN_CASE
 	goto_if_eq VAR_RESULT, FALSE, MauvilleCity_GameCorner_EventScript_NeedCoinCase
 	msgbox MauvilleCity_GameCorner_Text_WereYouLookingForCoins, MSGBOX_DEFAULT
-	message MauvilleCity_GameCorner_Text_CoinThousands
+	message MauvilleCity_GameCorner_Text_ChooseCoinAmount
 	waitmessage
-	multichoicegrid 8, 0, MULTI_COIN_DIGITS, 5, FALSE
+	special ShowCoinQuantityMenu
+	waitstate
 	goto_if_eq VAR_RESULT, MULTI_B_PRESSED, MauvilleCity_GameCorner_EventScript_CancelBuyCoins
-	copyvar VAR_0x8004, VAR_RESULT
-	message MauvilleCity_GameCorner_Text_CoinHundreds
-	waitmessage
-	multichoicegrid 8, 0, MULTI_COIN_DIGITS, 5, FALSE
-	goto_if_eq VAR_RESULT, MULTI_B_PRESSED, MauvilleCity_GameCorner_EventScript_CancelBuyCoins
-	copyvar VAR_0x8005, VAR_RESULT
-	message MauvilleCity_GameCorner_Text_CoinTens
-	waitmessage
-	multichoicegrid 8, 0, MULTI_COIN_DIGITS, 5, FALSE
-	goto_if_eq VAR_RESULT, MULTI_B_PRESSED, MauvilleCity_GameCorner_EventScript_CancelBuyCoins
-	copyvar VAR_0x8006, VAR_RESULT
-	message MauvilleCity_GameCorner_Text_CoinOnes
-	waitmessage
-	multichoicegrid 8, 0, MULTI_COIN_DIGITS, 5, FALSE
-	goto_if_eq VAR_RESULT, MULTI_B_PRESSED, MauvilleCity_GameCorner_EventScript_CancelBuyCoins
-	copyvar VAR_0x8007, VAR_RESULT
 	special QuoteCoinPurchase
 	goto_if_eq VAR_RESULT, 3, MauvilleCity_GameCorner_EventScript_CancelBuyCoins
 	goto_if_eq VAR_RESULT, 1, MauvilleCity_GameCorner_EventScript_NoRoomForCoins
@@ -607,21 +592,11 @@ MauvilleCity_GameCorner_Text_NeedCoinCaseForCoins:
 	.string "stowing the COINS.$"
 
 MauvilleCity_GameCorner_Text_WereYouLookingForCoins:
-	.string "COINS cost ¥20 each.\p"
-	.string "Choose the number digit by digit.\n"
-	.string "Press B to cancel.$"
+	.string "COINS cost ¥20 each.$"
 
-MauvilleCity_GameCorner_Text_CoinThousands:
-	.string "Choose the thousands digit.$"
-
-MauvilleCity_GameCorner_Text_CoinHundreds:
-	.string "Choose the hundreds digit.$"
-
-MauvilleCity_GameCorner_Text_CoinTens:
-	.string "Choose the tens digit.$"
-
-MauvilleCity_GameCorner_Text_CoinOnes:
-	.string "Choose the ones digit.$"
+MauvilleCity_GameCorner_Text_ChooseCoinAmount:
+	.string "LEFT/RIGHT: Choose digit\n"
+	.string "UP/DOWN: Change digit$"
 
 MauvilleCity_GameCorner_Text_ConfirmCoinPurchase:
 	.string "Buy {STR_VAR_1} COINS\n"

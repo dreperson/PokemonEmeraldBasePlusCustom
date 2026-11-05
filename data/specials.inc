@@ -547,3 +547,4 @@ gSpecials::
 	def_special MaxPartyFeebasBeauty
 	def_special QuoteCoinPurchase
 	def_special BuyChosenCoins
+	def_special ShowCoinQuantityMenu

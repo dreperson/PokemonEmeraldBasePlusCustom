@@ -117,8 +117,7 @@ static u16 CheckChosenCoinPurchase(u16 count)
 
 static u16 ChosenCoinCount(void)
 {
-    return gSpecialVar_0x8004 * 1000 + gSpecialVar_0x8005 * 100
-         + gSpecialVar_0x8006 * 10 + gSpecialVar_0x8007;
+    return gSpecialVar_0x8004;
 }
 
 void QuoteCoinPurchase(void)
