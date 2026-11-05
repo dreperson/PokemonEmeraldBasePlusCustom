@@ -545,3 +545,5 @@ gSpecials::
 	def_special BasePlusItems
 	def_special FindPartyFeebas
 	def_special MaxPartyFeebasBeauty
+	def_special QuoteCoinPurchase
+	def_special BuyChosenCoins

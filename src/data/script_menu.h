@@ -782,6 +782,31 @@ struct MultichoiceListStruct
     u8 count;
 };
 
+static const u8 sCoinDigit0[] = _("0");
+static const u8 sCoinDigit1[] = _("1");
+static const u8 sCoinDigit2[] = _("2");
+static const u8 sCoinDigit3[] = _("3");
+static const u8 sCoinDigit4[] = _("4");
+static const u8 sCoinDigit5[] = _("5");
+static const u8 sCoinDigit6[] = _("6");
+static const u8 sCoinDigit7[] = _("7");
+static const u8 sCoinDigit8[] = _("8");
+static const u8 sCoinDigit9[] = _("9");
+
+static const struct MenuAction MultichoiceList_CoinDigits[] =
+{
+    {sCoinDigit0},
+    {sCoinDigit1},
+    {sCoinDigit2},
+    {sCoinDigit3},
+    {sCoinDigit4},
+    {sCoinDigit5},
+    {sCoinDigit6},
+    {sCoinDigit7},
+    {sCoinDigit8},
+    {sCoinDigit9},
+};
+
 static const struct MultichoiceListStruct sMultichoiceLists[] =
 {
     [MULTI_BRINEY_ON_DEWFORD]          = MULTICHOICE(MultichoiceList_BrineyOnDewford),
@@ -898,6 +923,7 @@ static const struct MultichoiceListStruct sMultichoiceLists[] =
     [MULTI_SLATEPORT_TENT_RULES]       = MULTICHOICE(MultichoiceList_SlateportTentRules),
     [MULTI_FALLARBOR_TENT_RULES]       = MULTICHOICE(MultichoiceList_FallarborTentRules),
     [MULTI_TAG_MATCH_TYPE]             = MULTICHOICE(MultichoiceList_TagMatchType),
+    [MULTI_COIN_DIGITS]                = MULTICHOICE(MultichoiceList_CoinDigits),
 };
 
 const u8 *const gStdStrings[] =
