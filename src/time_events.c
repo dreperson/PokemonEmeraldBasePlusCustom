@@ -81,6 +81,10 @@ void UpdateShoalTideFlag(void)
         1, // 23
     };
 
+    // A player-selected tide remains in effect until the player changes it.
+    if (FlagGet(FLAG_SHOAL_TIDE_MANUAL))
+        return;
+
     if (IsMapTypeOutdoors(GetLastUsedWarpMapType()))
     {
         RtcCalcLocalTime();

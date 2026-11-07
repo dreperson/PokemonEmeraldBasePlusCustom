@@ -46,7 +46,7 @@
 #define FLAG_ALLOW_ITEMS     0x20 // Defines key item use
 #define FLAG_UNUSED_0x021    0x21 // Unused Flag
 #define FLAG_UNUSED_0x022    0x22 // Unused Flag
-#define FLAG_UNUSED_0x023    0x23 // Unused Flag
+#define FLAG_SHOAL_TIDE_MANUAL 0x23 // Tide is controlled by the Route 125 NPC
 #define FLAG_UNUSED_0x024    0x24 // Unused Flag
 #define FLAG_UNUSED_0x025    0x25 // Unused Flag
 #define FLAG_UNUSED_0x026    0x26 // Unused Flag
