@@ -2,6 +2,7 @@
 EventScript_CutTree::
 	lockall
 	goto_if_unset FLAG_BADGE01_GET, EventScript_CheckTreeCantCut
+	setfieldeffectargument 0, 0  @ Badge-based HM effects use the lead Pokemon.
 	dofieldeffect FLDEFF_USE_CUT_ON_TREE
 	waitstate
 	goto EventScript_CutTreeDown
@@ -52,6 +53,7 @@ Text_CantCut:
 EventScript_RockSmash::
 	lockall
 	goto_if_unset FLAG_BADGE03_GET, EventScript_CantSmashRock
+	setfieldeffectargument 0, 0  @ Badge-based HM effects use the lead Pokemon.
 	dofieldeffect FLDEFF_USE_ROCK_SMASH
 	waitstate
 	goto EventScript_SmashRock
@@ -106,6 +108,7 @@ Text_CantSmash:
 EventScript_StrengthBoulder::
 	lockall
 	goto_if_unset FLAG_BADGE04_GET, EventScript_CantStrength
+	setfieldeffectargument 0, 0  @ Badge-based HM effects use the lead Pokemon.
 	dofieldeffect FLDEFF_USE_STRENGTH
 	waitstate
 	goto EventScript_ActivateStrength
@@ -159,6 +162,7 @@ Text_StrengthActivated:
 
 EventScript_UseWaterfall::
 	lockall
+	setfieldeffectargument 0, 0  @ Badge-based HM effects use the lead Pokemon.
 	dofieldeffect FLDEFF_USE_WATERFALL
 	goto EventScript_EndWaterfall
 
@@ -185,6 +189,8 @@ Text_MonUsedWaterfall:
 
 EventScript_UseDive::
 	lockall
+	setfieldeffectargument 0, 0  @ Badge-based HM effects use the lead Pokemon.
+	setfieldeffectargument 1, 1
 	dofieldeffect FLDEFF_USE_DIVE
 	goto EventScript_EndDive
 	end
@@ -200,6 +206,8 @@ EventScript_EndDive::
 
 EventScript_UseDiveUnderwater::
 	lockall
+	setfieldeffectargument 0, 0  @ Badge-based HM effects use the lead Pokemon.
+	setfieldeffectargument 1, 1
 	dofieldeffect FLDEFF_USE_DIVE
 	goto EventScript_EndSurface
 	end

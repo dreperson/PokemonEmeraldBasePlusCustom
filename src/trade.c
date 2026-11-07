@@ -1,4 +1,5 @@
 #include "global.h"
+#include "constants/pokemon.h"
 #include "malloc.h"
 #include "battle_anim.h"
 #include "battle_interface.h"
@@ -3117,7 +3118,7 @@ static void TradeMons(u8 playerPartyIdx, u8 partnerPartyIdx)
 
     // By default, a Pokémon received from a trade will have 70 Friendship.
     // Eggs use Friendship to track egg cycles, so don't set this on Eggs.
-    friendship = 70;
+    friendship = gSpeciesInfo[GetMonData(playerMon, MON_DATA_SPECIES)].friendship == MAX_FRIENDSHIP ? MAX_FRIENDSHIP : 70;
     if (!GetMonData(playerMon, MON_DATA_IS_EGG))
         SetMonData(playerMon, MON_DATA_FRIENDSHIP, &friendship);
 

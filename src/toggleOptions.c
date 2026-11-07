@@ -4,6 +4,12 @@
 #include "constants/flags.h"  // FLAG_DEFEATED_...
 #include "item.h"              // CheckBagHasItem, AddBagItem
 #include "constants/items.h"   // ITEM_*
+#include "pokemon.h"
+#include "constants/species.h"
+#include "coins.h"
+#include "money.h"
+#include "string_util.h"
+#include "constants/coins.h"
 
 void EVsNo(void)
 {
@@ -65,4 +71,70 @@ void BasePlusItems(void)
 		AddBagItem(ITEM_STATUS_CASE, 1);
 	}
 
+	if (!CheckBagHasItem(ITEM_LINK_CABLE, 1))
+	{
+		VarSet(VAR_RESULT, 0);
+		AddBagItem(ITEM_LINK_CABLE, 1);
+	}
+
+}
+
+void FindPartyFeebas(void)
+{
+    u8 i;
+
+    gSpecialVar_Result = FALSE;
+    for (i = 0; i < gPlayerPartyCount && i < PARTY_SIZE; i++)
+    {
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG) == SPECIES_FEEBAS)
+        {
+            gSpecialVar_0x8004 = i;
+            gSpecialVar_Result = TRUE;
+            return;
+        }
+    }
+}
+
+void MaxPartyFeebasBeauty(void)
+{
+    u8 beauty = 255;
+    u16 i = gSpecialVar_0x8004;
+
+    if (i < gPlayerPartyCount && i < PARTY_SIZE
+     && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG) == SPECIES_FEEBAS)
+        SetMonData(&gPlayerParty[i], MON_DATA_BEAUTY, &beauty);
+}
+
+// Result: 0 = valid, 1 = not enough coin space, 2 = not enough money.
+static u16 CheckChosenCoinPurchase(u16 count)
+{
+    if (count > MAX_COINS - GetCoins())
+        return 1;
+    if (!IsEnoughMoney(&gSaveBlock1Ptr->money, (u32)count * 20))
+        return 2;
+    return 0;
+}
+
+static u16 ChosenCoinCount(void)
+{
+    return gSpecialVar_0x8004;
+}
+
+void QuoteCoinPurchase(void)
+{
+    u16 count = ChosenCoinCount();
+    gSpecialVar_Result = count == 0 ? 3 : CheckChosenCoinPurchase(count);
+    ConvertIntToDecimalStringN(gStringVar1, count, STR_CONV_MODE_LEFT_ALIGN, 4);
+    ConvertIntToDecimalStringN(gStringVar2, (u32)count * 20, STR_CONV_MODE_LEFT_ALIGN, 6);
+}
+
+void BuyChosenCoins(void)
+{
+    u16 count = ChosenCoinCount();
+    gSpecialVar_Result = CheckChosenCoinPurchase(count);
+    if (gSpecialVar_Result == 0 && count != 0)
+    {
+        RemoveMoney(&gSaveBlock1Ptr->money, (u32)count * 20);
+        AddCoins(count);
+    }
 }

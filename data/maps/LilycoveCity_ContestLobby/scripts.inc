@@ -1082,3 +1082,38 @@ LilycoveCity_ContestLobby_Text_MadePokeblocksWithFamily:
 	.string "I bet you can make smoother, better\n"
 	.string "{POKEBLOCK}S if you have more people.$"
 
+
+LilycoveCity_ContestLobby_EventScript_FeebasScientist::
+	lock
+	faceplayer
+	msgbox LilycoveCity_ContestLobby_Text_FeebasScientistIntro, MSGBOX_DEFAULT
+	special FindPartyFeebas
+	goto_if_eq VAR_RESULT, FALSE, LilycoveCity_ContestLobby_EventScript_FeebasScientistDone
+	msgbox LilycoveCity_ContestLobby_Text_FeebasScientistOffer, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, LilycoveCity_ContestLobby_EventScript_FeebasScientistNo
+	special MaxPartyFeebasBeauty
+	msgbox LilycoveCity_ContestLobby_Text_FeebasScientistSuccess, MSGBOX_DEFAULT
+LilycoveCity_ContestLobby_EventScript_FeebasScientistDone::
+	release
+	end
+
+LilycoveCity_ContestLobby_EventScript_FeebasScientistNo::
+	msgbox LilycoveCity_ContestLobby_Text_FeebasScientistDeclined, MSGBOX_DEFAULT
+	release
+	end
+
+LilycoveCity_ContestLobby_Text_FeebasScientistIntro:
+	.string "Have you got a Feebas?\n"
+	.string "If you bring me one, I can make it\l"
+	.string "beautiful!$"
+
+LilycoveCity_ContestLobby_Text_FeebasScientistOffer:
+	.string "Ah, a cute little Feebas?\n"
+	.string "Shall I make it beautiful?$"
+
+LilycoveCity_ContestLobby_Text_FeebasScientistSuccess:
+	.string "There! What a gorgeous little\n"
+	.string "creature.$"
+
+LilycoveCity_ContestLobby_Text_FeebasScientistDeclined:
+	.string "I'm here if you need me!$"

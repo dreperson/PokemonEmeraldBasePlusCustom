@@ -5042,7 +5042,7 @@ void ItemUseCB_RareCandy(u8 taskId, TaskFunc task)
     u16 *itemPtr = &gSpecialVar_ItemId;
     u8 level = GetMonData(mon, MON_DATA_LEVEL);
     bool8 cannotUseEffect;
-    bool8 retain;
+    bool8 retain = FALSE;
     bool8 carryOn;
 
     if (*itemPtr == ITEM_ENDLESS_CANDY)
@@ -5059,6 +5059,9 @@ void ItemUseCB_RareCandy(u8 taskId, TaskFunc task)
         {
             carryOn = FALSE;
             DisplayPartyMenuMessage(gText_LevelCapMet, TRUE);
+            gPartyMenuUseExitCallback = FALSE;
+            ScheduleBgCopyTilemapToVram(2);
+            gTasks[taskId].func = task;
         }
     }
     if (carryOn)
@@ -5088,7 +5091,8 @@ void ItemUseCB_RareCandy(u8 taskId, TaskFunc task)
             gPartyMenuUseExitCallback = TRUE;
             PlayFanfareByFanfareNum(FANFARE_LEVEL_UP);
             UpdateMonDisplayInfoAfterRareCandy(gPartyMenu.slotId, mon);
-            RemoveBagItem(gSpecialVar_ItemId, 1);
+            if (!retain)
+                RemoveBagItem(gSpecialVar_ItemId, 1);
             GetMonNickname(mon, gStringVar1);
             ConvertIntToDecimalStringN(gStringVar2, GetMonData(mon, MON_DATA_LEVEL), STR_CONV_MODE_LEFT_ALIGN, 3);
             StringExpandPlaceholders(gStringVar4, gText_PkmnElevatedToLvVar2);
@@ -5097,11 +5101,9 @@ void ItemUseCB_RareCandy(u8 taskId, TaskFunc task)
             gTasks[taskId].func = Task_DisplayLevelUpStatsPg1;
         }
 
-        if (retain) 
-        {
-            gSpecialVar_ItemId = ITEM_ENDLESS_CANDY;
-        }
     }
+    if (retain)
+        gSpecialVar_ItemId = ITEM_ENDLESS_CANDY;
 }
 
 static void UpdateMonDisplayInfoAfterRareCandy(u8 slot, struct Pokemon *mon)
@@ -5344,6 +5346,26 @@ void ItemUseCB_EvolutionStone(u8 taskId, TaskFunc task)
 {
     PlaySE(SE_SELECT);
     gCB2_AfterEvolution = gPartyMenu.exitCallback;
+    if (gSpecialVar_ItemId == ITEM_LINK_CABLE)
+    {
+        struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
+        u16 targetSpecies = GetEvolutionTargetSpecies(mon, EVO_MODE_ITEM_USE, ITEM_LINK_CABLE);
+
+        if (targetSpecies == SPECIES_NONE)
+        {
+            gPartyMenuUseExitCallback = FALSE;
+            DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
+            ScheduleBgCopyTilemapToVram(2);
+            gTasks[taskId].func = task;
+        }
+        else
+        {
+            FreePartyPointers();
+            BeginEvolutionScene(mon, targetSpecies, FALSE, gPartyMenu.slotId);
+            DestroyTask(taskId);
+        }
+        return;
+    }
     if (ExecuteTableBasedItemEffect_(gPartyMenu.slotId, gSpecialVar_ItemId, 0))
     {
         gPartyMenuUseExitCallback = FALSE;

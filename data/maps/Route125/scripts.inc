@@ -81,3 +81,31 @@ Route125_EventScript_Auron::
 	msgbox Route125_Text_AuronPostBattle, MSGBOX_AUTOCLOSE
 	end
 
+
+Route125_EventScript_ShoalTideKeeper::
+	lock
+	faceplayer
+	message Route125_Text_ShoalTideQuestion
+	waitmessage
+	multichoice 20, 0, MULTI_SHOAL_TIDE, FALSE
+	switch VAR_RESULT
+	case 0, Route125_EventScript_ShoalTideUp
+	case 1, Route125_EventScript_ShoalTideDown
+	release
+	end
+
+Route125_EventScript_ShoalTideUp::
+	setflag FLAG_SYS_SHOAL_TIDE
+	setflag FLAG_SHOAL_TIDE_MANUAL
+	release
+	end
+
+Route125_EventScript_ShoalTideDown::
+	clearflag FLAG_SYS_SHOAL_TIDE
+	setflag FLAG_SHOAL_TIDE_MANUAL
+	release
+	end
+
+Route125_Text_ShoalTideQuestion:
+	.string "Do you want the water\n"
+	.string "up or down?$"

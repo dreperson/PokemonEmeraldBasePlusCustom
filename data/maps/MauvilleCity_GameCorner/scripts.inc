@@ -9,67 +9,29 @@ MauvilleCity_GameCorner_MapScripts::
 	.set TM_ICE_BEAM_COINS, 4000
 	.set DOLL_COINS, 1000
 
-	.set COINS_PRICE_50,  1000
-	.set COINS_PRICE_500, 10000
-
 MauvilleCity_GameCorner_EventScript_CoinsClerk::
 	lock
 	faceplayer
 	msgbox MauvilleCity_GameCorner_Text_ThisIsMauvilleGameCorner, MSGBOX_DEFAULT
 	checkitem ITEM_COIN_CASE
 	goto_if_eq VAR_RESULT, FALSE, MauvilleCity_GameCorner_EventScript_NeedCoinCase
-	message MauvilleCity_GameCorner_Text_WereYouLookingForCoins
+	msgbox MauvilleCity_GameCorner_Text_WereYouLookingForCoins, MSGBOX_DEFAULT
+	message MauvilleCity_GameCorner_Text_ChooseCoinAmount
 	waitmessage
-	showmoneybox 0, 0
-	showcoinsbox 1, 6
-	goto MauvilleCity_GameCorner_EventScript_ChooseCoinsDefault50
-
-MauvilleCity_GameCorner_EventScript_ChooseCoinsDefault50::
-	multichoicedefault 15, 0, MULTI_GAME_CORNER_COINS, 0, FALSE
-	switch VAR_RESULT
-	case 0, MauvilleCity_GameCorner_EventScript_Buy50Coins
-	case 1, MauvilleCity_GameCorner_EventScript_Buy500Coins
-	goto MauvilleCity_GameCorner_EventScript_CancelBuyCoins
-	end
-
-@ Unused
-MauvilleCity_GameCorner_EventScript_ChooseCoinsDefault500::
-	multichoicedefault 15, 0, MULTI_GAME_CORNER_COINS, 1, FALSE
-	switch VAR_RESULT
-	case 0, MauvilleCity_GameCorner_EventScript_Buy50Coins
-	case 1, MauvilleCity_GameCorner_EventScript_Buy500Coins
-	goto MauvilleCity_GameCorner_EventScript_CancelBuyCoins
-	end
-
-MauvilleCity_GameCorner_EventScript_Buy50Coins::
-	checkcoins VAR_TEMP_1
-	goto_if_ge VAR_TEMP_1, (MAX_COINS + 1 - 50), MauvilleCity_GameCorner_EventScript_NoRoomForCoins
-	checkmoney COINS_PRICE_50
-	goto_if_eq VAR_RESULT, FALSE, MauvilleCity_GameCorner_EventScript_NotEnoughMoney
-	addcoins 50
-	removemoney COINS_PRICE_50
-	updatemoneybox
-	updatecoinsbox 1, 6
+	special ShowCoinQuantityMenu
+	waitstate
+	goto_if_eq VAR_RESULT, MULTI_B_PRESSED, MauvilleCity_GameCorner_EventScript_CancelBuyCoins
+	special QuoteCoinPurchase
+	goto_if_eq VAR_RESULT, 3, MauvilleCity_GameCorner_EventScript_CancelBuyCoins
+	goto_if_eq VAR_RESULT, 1, MauvilleCity_GameCorner_EventScript_NoRoomForCoins
+	goto_if_eq VAR_RESULT, 2, MauvilleCity_GameCorner_EventScript_NotEnoughMoney
+	msgbox MauvilleCity_GameCorner_Text_ConfirmCoinPurchase, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, MauvilleCity_GameCorner_EventScript_CancelBuyCoins
+	special BuyChosenCoins
+	goto_if_eq VAR_RESULT, 1, MauvilleCity_GameCorner_EventScript_NoRoomForCoins
+	goto_if_eq VAR_RESULT, 2, MauvilleCity_GameCorner_EventScript_NotEnoughMoney
 	playse SE_SHOP
 	msgbox MauvilleCity_GameCorner_Text_ThankYouHereAreYourCoins, MSGBOX_DEFAULT
-	hidemoneybox
-	hidecoinsbox 0, 5
-	release
-	end
-
-MauvilleCity_GameCorner_EventScript_Buy500Coins::
-	checkcoins VAR_TEMP_1
-	goto_if_ge VAR_TEMP_1, (MAX_COINS + 1 - 500), MauvilleCity_GameCorner_EventScript_NoRoomForCoins
-	checkmoney COINS_PRICE_500
-	goto_if_eq VAR_RESULT, FALSE, MauvilleCity_GameCorner_EventScript_NotEnoughMoney
-	addcoins 500
-	removemoney COINS_PRICE_500
-	updatemoneybox
-	updatecoinsbox 1, 6
-	playse SE_SHOP
-	msgbox MauvilleCity_GameCorner_Text_ThankYouHereAreYourCoins, MSGBOX_DEFAULT
-	hidemoneybox
-	hidecoinsbox 0, 5
 	release
 	end
 
@@ -80,22 +42,16 @@ MauvilleCity_GameCorner_EventScript_NeedCoinCase::
 
 MauvilleCity_GameCorner_EventScript_NotEnoughMoney::
 	msgbox MauvilleCity_GameCorner_Text_DontHaveEnoughMoney, MSGBOX_DEFAULT
-	hidemoneybox
-	hidecoinsbox 0, 5
 	release
 	end
 
 MauvilleCity_GameCorner_EventScript_CancelBuyCoins::
 	msgbox MauvilleCity_GameCorner_Text_DontNeedCoinsThen, MSGBOX_DEFAULT
-	hidemoneybox
-	hidecoinsbox 0, 5
 	release
 	end
 
 MauvilleCity_GameCorner_EventScript_NoRoomForCoins::
 	msgbox MauvilleCity_GameCorner_Text_CoinCaseIsFull, MSGBOX_DEFAULT
-	hidemoneybox
-	hidecoinsbox 0, 5
 	release
 	end
 
@@ -636,9 +592,15 @@ MauvilleCity_GameCorner_Text_NeedCoinCaseForCoins:
 	.string "stowing the COINS.$"
 
 MauvilleCity_GameCorner_Text_WereYouLookingForCoins:
-	.string "Were you looking for COINS?\p"
-	.string "It's ¥1000 for 50 COINS.\n"
-	.string "Would you like some?$"
+	.string "COINS cost ¥20 each.$"
+
+MauvilleCity_GameCorner_Text_ChooseCoinAmount:
+	.string "LEFT/RIGHT: Choose digit\n"
+	.string "UP/DOWN: Change digit$"
+
+MauvilleCity_GameCorner_Text_ConfirmCoinPurchase:
+	.string "Buy {STR_VAR_1} COINS\n"
+	.string "for ¥{STR_VAR_2}?$"
 
 MauvilleCity_GameCorner_Text_ThankYouHereAreYourCoins:
 	.string "Thank you very much!\n"
@@ -650,7 +612,7 @@ MauvilleCity_GameCorner_Text_DontHaveEnoughMoney:
 
 MauvilleCity_GameCorner_Text_CoinCaseIsFull:
 	.string "Oh?\n"
-	.string "Your COIN CASE is full.$"
+	.string "Your COIN CASE cannot hold that many.$"
 
 MauvilleCity_GameCorner_Text_DontNeedCoinsThen:
 	.string "Oh… You don't need COINS, then?\n"

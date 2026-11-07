@@ -782,6 +782,15 @@ struct MultichoiceListStruct
     u8 count;
 };
 
+static const u8 sText_ShoalTideUp[] = _("Up");
+static const u8 sText_ShoalTideDown[] = _("Down");
+
+static const struct MenuAction MultichoiceList_ShoalTide[] =
+{
+    {sText_ShoalTideUp},
+    {sText_ShoalTideDown},
+};
+
 static const struct MultichoiceListStruct sMultichoiceLists[] =
 {
     [MULTI_BRINEY_ON_DEWFORD]          = MULTICHOICE(MultichoiceList_BrineyOnDewford),
@@ -898,6 +907,7 @@ static const struct MultichoiceListStruct sMultichoiceLists[] =
     [MULTI_SLATEPORT_TENT_RULES]       = MULTICHOICE(MultichoiceList_SlateportTentRules),
     [MULTI_FALLARBOR_TENT_RULES]       = MULTICHOICE(MultichoiceList_FallarborTentRules),
     [MULTI_TAG_MATCH_TYPE]             = MULTICHOICE(MultichoiceList_TagMatchType),
+    [MULTI_SHOAL_TIDE]                 = MULTICHOICE(MultichoiceList_ShoalTide),
 };
 
 const u8 *const gStdStrings[] =

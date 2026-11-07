@@ -424,7 +424,9 @@
 #define ITEM_ENDLESS_REPEL 380
 #define ITEM_STATUS_CASE 381
 
-#define ITEMS_COUNT 382
+#define ITEM_LINK_CABLE 382
+
+#define ITEMS_COUNT 383
 
 // A special item id associated with "Cancel"/"Exit" etc. in a list of items or decorations
 // Its icon is defined at ITEMS_COUNT as the "return to field" arrow

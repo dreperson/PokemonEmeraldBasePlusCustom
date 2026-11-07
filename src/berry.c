@@ -1063,15 +1063,8 @@ static bool32 BerryTreeGrow(struct BerryTree *tree)
         tree->stage++;
         break;
     case BERRY_STAGE_BERRIES:
-        tree->watered1 = 0;
-        tree->watered2 = 0;
-        tree->watered3 = 0;
-        tree->watered4 = 0;
-        tree->berryYield = 0;
-        tree->stage = BERRY_STAGE_SPROUTED;
-        if (++tree->regrowthCount == 10)
-            *tree = gBlankBerryTree;
-        break;
+        // Ripe berries remain available until the player harvests them.
+        return FALSE;
     }
     return TRUE;
 }
@@ -1081,34 +1074,29 @@ void BerryTreeTimeUpdate(s32 minutes)
     int i;
     struct BerryTree *tree;
 
+    if (minutes <= 0)
+        return;
+
     for (i = 0; i < BERRY_TREES_COUNT; i++)
     {
         tree = &gSaveBlock1Ptr->berryTrees[i];
 
         if (tree->berry && tree->stage && !tree->stopGrowth)
         {
-            if (minutes >= GetStageDurationByBerryType(tree->berry) * 71)
-            {
-                *tree = gBlankBerryTree;
-            }
-            else
-            {
-                s32 time = minutes;
+            s32 time = minutes;
 
-                while (time != 0)
+            // Advance growing trees, but never expire a ripe harvest.
+            while (time != 0 && tree->stage != BERRY_STAGE_BERRIES)
+            {
+                if (tree->minutesUntilNextStage > time)
                 {
-                    if (tree->minutesUntilNextStage > time)
-                    {
-                        tree->minutesUntilNextStage -= time;
-                        break;
-                    }
-                    time -= tree->minutesUntilNextStage;
-                    tree->minutesUntilNextStage = GetStageDurationByBerryType(tree->berry);
-                    if (!BerryTreeGrow(tree))
-                        break;
-                    if (tree->stage == BERRY_STAGE_BERRIES)
-                        tree->minutesUntilNextStage *= 4;
+                    tree->minutesUntilNextStage -= time;
+                    break;
                 }
+                time -= tree->minutesUntilNextStage;
+                tree->minutesUntilNextStage = GetStageDurationByBerryType(tree->berry);
+                if (!BerryTreeGrow(tree))
+                    break;
             }
         }
     }

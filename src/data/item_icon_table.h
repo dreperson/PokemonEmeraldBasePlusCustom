@@ -407,6 +407,7 @@ const u32 *const gItemIconTable[ITEMS_COUNT + 1][2] =
     [ITEM_ENDLESS_CANDY] = {gItemIcon_RareCandy, gItemIconPalette_RareCandy},
     [ITEM_ENDLESS_REPEL] = {gItemIcon_Repel, gItemIconPalette_MaxRepel},
     [ITEM_STATUS_CASE] = {gItemIcon_CoinCase, gItemIconPalette_CoinCase},
+    [ITEM_LINK_CABLE] = {gItemIcon_VSSeeker, gItemIconPalette_VSSeeker},
     // Return to field arrow
     [ITEMS_COUNT] = {gItemIcon_ReturnToFieldArrow, gItemIconPalette_ReturnToFieldArrow},
 };

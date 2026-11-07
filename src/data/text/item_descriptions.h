@@ -1571,3 +1571,8 @@ static const u8 sEndlessRepelDesc[] = _(
 static const u8 sStatusCaseDesc[] = _(
     "Apply status \n"
     "conditions to PKMN.");
+
+static const u8 sLinkCableDesc[] = _(
+    "A reusable cable for\n"
+    "evolving trade-only\n"
+    "POKEMON.");
